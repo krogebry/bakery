@@ -1,0 +1,20 @@
+{
+  "name": "web_pie",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[pan]",
+    "role[crust]",
+    "role[filling]",
+    "recipe[unicorn::default]",
+    "recipe[web_pie::filling]",
+    "role[topping]"
+  ],
+  "env_run_lists": {
+  }
+}

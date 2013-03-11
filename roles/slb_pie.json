@@ -1,0 +1,20 @@
+{
+  "name": "slb_pie",
+  "description": "Software Load Balancer pie.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[pan]",
+    "role[crust]",
+    "role[filling]",
+    "role[slb::filling]",
+    "role[haproxy::app_lb]",
+    "role[topping]"
+  ],
+  "env_run_lists": {
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "crust",
+  "description": "Crust is more specific than pan, it goes with the food, and interacts with the filling and topping.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[bakery::crust]"
+  ],
+  "env_run_lists": {
+  }
+}
