@@ -1,0 +1,2 @@
+cookbook 'haproxy', :locked_version => '1.2.0'
+cookbook 'cpu', :locked_version => '0.2.0'

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+java -jar logstash-1.1.7-monolithic.jar web --backend elasticsearch://10.4.18.24/
+

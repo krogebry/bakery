@@ -1,0 +1,58 @@
+{
+  "stack_name": "logstash",
+  "resources": {
+    "syslog-input": {
+      "max": 2,
+      "min": 2,
+      "image_id": 79894,
+      "chef": {
+        "tags": ["syslog"],
+        "run_list": [ "role[logstash_syslog_input]" ]
+      },
+      "flavor_id": 100
+    },
+
+    "chef-client-input": {
+      "max": 2,
+      "min": 2,
+      "chef": {
+        "tags": ["chef_client"],
+        "run_list": [ "role[logstash_chef_client_input]" ]
+      },
+      "image_id": 79894,
+      "flavor_id": 100
+    },
+
+    "authlog-input": {
+      "max": 2,
+      "min": 2,
+      "image_id": 79894,
+      "chef": {
+        "tags": ["authlog"],
+        "run_list": [ "role[logstash_authlog_input]" ]
+      },
+      "flavor_id": 100
+    },
+
+    "elasticsearch": {
+      "max": 3,
+      "min": 3,
+      "image_id": 79896,
+      "chef": {
+        "run_list": [ "role[logstash_elasticcache]" ]
+      },
+      "flavor_id": 100
+    },
+
+    "kibana": {
+      "max": 3,
+      "min": 3,
+      "image_id": 79894,
+      "chef": {
+        "run_list": [ "role[logstash_kibana]" ]
+      },
+      "flavor_id": 100
+    }
+
+  }
+}

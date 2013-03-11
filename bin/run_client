@@ -1,0 +1,4 @@
+#!/bin/bash
+
+java -jar logstash-1.1.7-monolithic.jar agent -f shipper.conf
+
