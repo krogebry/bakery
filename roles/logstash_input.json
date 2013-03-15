@@ -1,6 +1,6 @@
 {
-  "name": "logstash_elasticsearch",
-  "description": "",
+  "name": "logstash_input",
+  "description": "Input handler.",
   "json_class": "Chef::Role",
   "default_attributes": {
   },
@@ -11,7 +11,7 @@
     "role[pan]",
     "role[crust]",
     "role[filling]",
-    "recipe[log_pie::elasticsearch]",
+    "recipe[logstash::server]",
     "role[topping]"
   ],
   "env_run_lists": {

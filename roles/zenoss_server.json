@@ -1,6 +1,6 @@
 {
-  "name": "pan",
-  "description": "Everything is baked in a pan.",
+  "name": "zenoss_server",
+  "description": "",
   "json_class": "Chef::Role",
   "default_attributes": {
   },
@@ -8,8 +8,11 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[snmp::default]",
-    "recipe[bakery::pan]"
+    "role[pan]",
+    "role[crust]",
+    "role[filling]",
+    "recipe[zenoss::server]",
+    "role[topping]"
   ],
   "env_run_lists": {
   }

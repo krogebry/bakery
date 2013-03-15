@@ -8,7 +8,9 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[bakery::crust]"
+    "recipe[bakery::crust]",
+      "recipe[zenoss::client]"
+
   ],
   "env_run_lists": {
   }

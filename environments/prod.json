@@ -1,0 +1,18 @@
+{
+  "name": "prod",
+  "description": "Main production environment.",
+  "cookbook_versions": {
+    "bakery": ">= 0.2.0",
+    "web_pie": ">= 0.1.0",
+    "slb_pie": ">= 0.1.0"
+  },
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "chef": {
+      "server_url": "https://15.185.102.107/organizations/prod2-ksonsoftware-com"
+    }
+  },
+  "override_attributes": {
+  }
+}

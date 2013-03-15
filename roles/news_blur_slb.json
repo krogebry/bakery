@@ -1,5 +1,5 @@
 {
-  "name": "logstash_elasticsearch",
+  "name": "news_blur_slb",
   "description": "",
   "json_class": "Chef::Role",
   "default_attributes": {
@@ -11,7 +11,8 @@
     "role[pan]",
     "role[crust]",
     "role[filling]",
-    "recipe[log_pie::elasticsearch]",
+    "recipe[nginx::default]",
+    "recipe[news_blur::slb]",
     "role[topping]"
   ],
   "env_run_lists": {

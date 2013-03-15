@@ -1,0 +1,15 @@
+knife acl add nodes logstash-syslog-input0.prod2.ksonsoftware.com update client logstash-syslog-input0.prod2.ksonsoftware.com
+knife acl add nodes logstash-syslog-input1.prod2.ksonsoftware.com update client logstash-syslog-input1.prod2.ksonsoftware.com
+knife acl add nodes logstash-zenoss-input0.prod2.ksonsoftware.com update client logstash-zenoss-input0.prod2.ksonsoftware.com
+knife acl add nodes logstash-zenoss-input1.prod2.ksonsoftware.com update client logstash-zenoss-input1.prod2.ksonsoftware.com
+knife acl add nodes logstash-chef-client-input0.prod2.ksonsoftware.com update client logstash-chef-client-input0.prod2.ksonsoftware.com
+knife acl add nodes logstash-chef-client-input1.prod2.ksonsoftware.com update client logstash-chef-client-input1.prod2.ksonsoftware.com
+knife acl add nodes logstash-authlog-input0.prod2.ksonsoftware.com update client logstash-authlog-input0.prod2.ksonsoftware.com
+knife acl add nodes logstash-authlog-input1.prod2.ksonsoftware.com update client logstash-authlog-input1.prod2.ksonsoftware.com
+knife acl add nodes logstash-elasticsearch0.prod2.ksonsoftware.com update client logstash-elasticsearch0.prod2.ksonsoftware.com
+knife acl add nodes logstash-elasticsearch1.prod2.ksonsoftware.com update client logstash-elasticsearch1.prod2.ksonsoftware.com
+knife acl add nodes logstash-elasticsearch2.prod2.ksonsoftware.com update client logstash-elasticsearch2.prod2.ksonsoftware.com
+knife acl add nodes logstash-kibana0.prod2.ksonsoftware.com update client logstash-kibana0.prod2.ksonsoftware.com
+knife acl add nodes logstash-kibana1.prod2.ksonsoftware.com update client logstash-kibana1.prod2.ksonsoftware.com
+knife acl add nodes logstash-kibana2.prod2.ksonsoftware.com update client logstash-kibana2.prod2.ksonsoftware.com
+knife acl add nodes logstash-zenoss0.prod2.ksonsoftware.com update client logstash-zenoss0.prod2.ksonsoftware.com

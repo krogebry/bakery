@@ -1,6 +1,6 @@
 {
-  "name": "pan",
-  "description": "Everything is baked in a pan.",
+  "name": "news_blur_app",
+  "description": "",
   "json_class": "Chef::Role",
   "default_attributes": {
   },
@@ -8,8 +8,11 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[snmp::default]",
-    "recipe[bakery::pan]"
+    "role[pan]",
+    "role[crust]",
+    "role[filling]",
+    "recipe[news_blur::app]",
+    "role[topping]"
   ],
   "env_run_lists": {
   }

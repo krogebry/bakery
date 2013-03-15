@@ -1,0 +1,16 @@
+{
+  "id": "zenossadmin",
+  "groups": "sysadmin",
+  "zenoss": {
+    "password": "orange1",
+    "roles": [
+      "Manager",
+      "ZenUser"
+    ],
+    "user_groups": [
+      "managers"
+    ],
+    "pager": "zpager@example.com",
+    "email": "zemail@example.com"
+  }
+}

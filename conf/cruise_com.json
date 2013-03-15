@@ -1,0 +1,44 @@
+{
+  "stack_name": "cruise_com",
+  "include": [ "logstash" ],
+
+  "zones": {
+    "prod0": {
+      "image_id": 79894,
+      "resources": {
+        "kibana": {
+          "image_id": 79894
+        }
+      }
+    },
+
+    "prod2": {
+      "image_id": 49520,
+      "resources": {
+        "kibana": {
+          "image_id": 49520
+        }
+      }
+    }
+  },
+
+  "inputs": [ "syslog", "authlog", "chef-log" ],
+
+  "resources": {
+    "slb": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[web_pie]" ]
+      }
+    },
+    "zenoss": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[zenoss]" ]
+      },
+      "flavor_id": 104
+    }
+  }
+}
