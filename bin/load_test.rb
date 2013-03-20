@@ -41,7 +41,6 @@ if(false)
     sleep 1
     puts "Awake: %i" % @num_threads
   end
-
   @num_threads += 1
   threads << Thread.new do
     begin
@@ -52,6 +51,35 @@ if(false)
   end
 end
 end
+
+## Get nodes
+if(true)
+threads = []
+#while(@num_threads >= MAX_NUM_THREADS)
+#puts "Sleeping: %i"%  @num_threads
+#sleep 1
+#puts "Awake: %i" % @num_threads
+#end
+#@num_threads += 1
+#@num_threads -= 1
+all_nodes = chef_srv.get_rest( "/nodes" ).keys
+100.times do |thread_id|
+  threads << Thread.new do
+    300.times do |node_id|
+      node_name = all_nodes[rand(all_nodes.size-1)].chomp
+      #puts "Getting: [%s]" % node_name
+      chef_srv.get_rest( "/nodes/%s" % node_name )
+
+      acls = chef_srv.get_rest( "/nodes/%s/_acl" % node_name )
+      #acls["update"]["actors"].push( node_name )
+      #chef_srv.put_rest("/%s/%s/_acl/%s" % ['nodes',node_name,'update'], acls )
+    end
+  end
+end
+threads.each do |t| t.join end
+end
+
+exit
 
 @num_threads = 0
 
