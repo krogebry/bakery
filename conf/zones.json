@@ -1,0 +1,37 @@
+{
+  "prod0": {
+    "defaults": {
+      "image_id": 80314,
+      "flavor_id": 102
+    },
+    "stacks": { 
+      "fat-chef": {
+      }
+    },
+    "region_name": "az-1.region-a.geo-1"
+  },
+
+  "prod1": {
+    "defaults": {
+      "image_id": 68157,
+      "flavor_id": 102
+    },
+    "stacks": {
+      "cruise_comm": {
+      }
+    },
+    "region_name": "az-2.region-a.geo-1"
+  },
+
+  "prod2": {
+    "defaults": {
+      "image_id": 49520,
+      "flavor_id": 102
+    },
+    "stacks": {
+      "fat_log": {
+      }
+    },
+    "region_name": "az-3.region-a.geo-1"
+  }
+}

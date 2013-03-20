@@ -1,0 +1,23 @@
+{
+  "name": "cc",
+
+  "inputs": [ "syslog", "authlog", "chef-log" ],
+
+  "resources": {
+    "slb": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[web_pie]" ]
+      }
+    },
+    "zenoss": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[zenoss]" ]
+      },
+      "flavor_id": 104
+    }
+  }
+}

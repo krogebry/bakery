@@ -1,0 +1,56 @@
+{
+  "name": "fat",
+
+  "inputs": [ "syslog", "authlog", "chef-log" ],
+
+  "resources": {
+    "input": {
+      "max": 4,
+      "min": 4,
+      "chef": {
+        "tags": [ "fat-log" ],
+        "run_list": [ "role[fat-log_input]" ]
+      },
+      "flavor_id": 104
+    },
+
+    "es-master": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "tags": [ "fat-log" ],
+        "run_list": [ "role[fat-log_elasticsearch]", "role[logstash_elasticsearch_master]" ]
+      },
+      "flavor_id": 100
+    },
+
+    "es-data": {
+      "max": 30,
+      "min": 30,
+      "chef": {
+        "tags": [ "fat-log" ],
+        "run_list": [ "role[fat-log_elasticsearch]", "role[logstash_elasticsearch_data]" ]
+      },
+      "flavor_id": 104
+    },
+
+    "kibana": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "tags": [ "fat-log" ],
+        "run_list": [ "role[logstash_kibana]" ]
+      },
+      "flavor_id": 100
+    },
+
+    "zenoss": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[zenoss_server]" ]
+      },
+      "flavor_id": 104
+    }
+  }
+}

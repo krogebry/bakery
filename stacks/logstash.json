@@ -1,0 +1,33 @@
+{
+  "name": "ls",
+
+  "resources": {
+    "input": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[logstash_input]" ]
+      },
+      "flavor_id": 100
+    },
+
+    "es": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[logstash_elasticsearch]" ]
+      },
+      "flavor_id": 100
+    },
+
+    "kibana": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[logstash_kibana]" ]
+      },
+      "flavor_id": 100
+    }
+  }
+
+}

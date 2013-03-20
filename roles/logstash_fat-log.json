@@ -1,0 +1,39 @@
+{
+  "name": "logstash_fat-log",
+  "description": "Fat logs",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "logstash": {
+      "elasticsearch_query": "role:logstash_elasticsearch AND chef_environment:prod AND tags:fat-log",
+      "server": {
+        "filters": {
+          "grok": {
+            "type": "pchef_nginx",
+            "pattern": "(?:<[0-9]{1,}>)? %{IP:clientip} %{DATA:ident} %{DATA:remote_user} \\[%{HTTPDATE:timestamp}\\]  \"(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{DATA:httpversion})?|-)\" %{INT:status} \"%{DATA:request_time}\" %{INT:body_bytes_sent} \"%{DATA:referer}\" \"%{DATA:user_agent}\" \"%{IP:upstream_addr}:%{INT:upstream_port}\" \"%{INT:upstream_status}\" \"%{DATA:upstream_response_time}\" \"%{DATA:chef_version}\" \"%{DATA:http_x_ops_sign}\" \"%{DATA:http_x_ops_userid}\" \"%{TIMESTAMP_ISO8601:http_x_ops_timestamp}\" \"%{DATA:http_x_ops_content_hash}\" %{INT:request_length}"
+          },
+          "grep": {
+            "type": "pchef_nginx",
+            "tags": [
+              "_grokparsefailure"
+            ],
+            "negate": true
+          }
+        },
+        "inputs": {
+          "syslog": {
+            "type": "pchef-nginx",
+            "port": 5671
+          }
+        }
+      }
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+
+  ],
+  "env_run_lists": {
+  }
+}

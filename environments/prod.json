@@ -10,7 +10,7 @@
   "chef_type": "environment",
   "default_attributes": {
     "chef": {
-      "server_url": "https://15.185.102.107/organizations/prod2-ksonsoftware-com"
+      "server_url": "https://15.185.102.107/organizations/prod0-ksonsoftware-com"
     }
   },
   "override_attributes": {

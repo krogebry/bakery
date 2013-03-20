@@ -1,0 +1,19 @@
+{
+  "name": "fat-chef-be",
+  "description": "FatChef backend",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[pan]",
+    "role[crust]",
+    "role[filling]",
+    "recipe[fat-chef::default]",
+    "role[topping]"
+  ],
+  "env_run_lists": {
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "logstash_elasticsearch_master",
+  "description": "Master es node",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "tags": [ "master" ]
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[pan]",
+    "role[crust]",
+    "role[filling]",
+    "recipe[log_pie::elasticsearch]",
+    "role[topping]"
+  ],
+  "env_run_lists": {
+  }
+}
