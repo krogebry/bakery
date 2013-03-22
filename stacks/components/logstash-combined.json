@@ -1,0 +1,15 @@
+{
+  "name": "ls",
+  "resources": {
+    "logstash-combined": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "tags": [ "auth-log", "sys-log", "chef-log" ],
+        "run_list": [ "role[logstash_input]", "role[logstash_elasticsearch]", "role[logstash_kibana]", 
+          "role[logstash_authlog_input]", "role[logstash_chef_client_input]", "role[logstash_syslog_input]" ]
+      },
+      "flavor_id": 105
+    }
+  }
+}

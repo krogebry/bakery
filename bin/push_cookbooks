@@ -1,0 +1,6 @@
+#!/bin/bash
+
+./bin/tune_env prod0 ; berks upload
+./bin/tune_env prod1 ; berks upload
+./bin/tune_env prod2 ; berks upload
+

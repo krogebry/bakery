@@ -1,5 +1,0 @@
-#!/bin/bash
-
-for node_id in `hpcloud servers|grep prod0.ksonsoftware.com|awk '{print $2}'`; do   hpcloud servers:remove $node_id; done &
-for node in `knife node list|grep "nb-"`; do   knife node delete $node -y ; knife client delete $node -y; done
-

@@ -2,18 +2,25 @@
   "name": "ls",
 
   "resources": {
-    "input": {
+    "combined": {
       "max": 1,
       "min": 1,
       "chef": {
+        "run_list": [ "role[logstash_input]", "role[logstash_elasticsearch]", "role[logstash_kibana]" ]
+      }
+    },
+
+    "input": {
+      "max": 0,
+      "min": 0,
+      "chef": {
         "run_list": [ "role[logstash_input]" ]
-      },
-      "flavor_id": 100
+      }
     },
 
     "es": {
-      "max": 1,
-      "min": 1,
+      "max": 0,
+      "min": 0,
       "chef": {
         "run_list": [ "role[logstash_elasticsearch]" ]
       },
@@ -21,8 +28,8 @@
     },
 
     "kibana": {
-      "max": 1,
-      "min": 1,
+      "max": 0,
+      "min": 0,
       "chef": {
         "run_list": [ "role[logstash_kibana]" ]
       },

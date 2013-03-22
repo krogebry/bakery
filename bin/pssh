@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#pssh -h hosts_all -l ubuntu -p 10 -t 0 -x"-i /home/krogebry/.ssh/keys/prod0.ksonsoftware.com.pem" $1
+#pssh -P -h tmp/hosts_all -l ubuntu -p 10 -t 0 $1
+pssh -h tmp/hosts_all -l ubuntu -p 10 -t 0 $1

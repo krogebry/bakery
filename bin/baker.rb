@@ -2,7 +2,7 @@
 ##
 # The baker puts everything together.
 #
-# knife acl add nodes input0.prod1.ksonsoftware.com update client input0.prod1.ksonsoftware.com
+# knife acl add nodes fat-es-master0.prod2.ksonsoftware.com update client fat-es-master0.prod2.ksonsoftware.com
 #
 # pssh -P -h hosts_all -l ubuntu -p 10 -t 0 -x"-i /home/krogebry/.ssh/keys/aw0_az1_prod0.pem" "sudo chef-client"
 # pssh -P -h hosts_all -l ubuntu -p 10 -t 0 -x"-i /home/krogebry/.ssh/keys/prod2.ksonsoftware.com.pem" "sudo chef-client"
@@ -20,6 +20,7 @@
 #
 # Reset es
 # pssh -h hosts_elasticsearch -l ubuntu -p 10 -t 0 -x"-i /home/krogebry/.ssh/keys/aw0_az1_prod0.pem" "sudo service elasticsearch stop ; sudo rm -rf /mnt/elasticsearch/data/elasticsearch/ ; sudo service elasticsearch start"
+FS_ROOT = File.dirname(File.expand_path(File.join( __FILE__, ".." ))) 
 require 'rubygems'
 require 'pp'
 require 'chef'
@@ -27,7 +28,8 @@ require 'json'
 require 'logger'
 require 'optparse'
 require 'hash_deep_merge'
-require "./lib/bakery.rb"
+require "%s/lib/bakery.rb" % FS_ROOT
+require "%s/conf/bakery.rb" % FS_ROOT
 
 
 
@@ -59,48 +61,31 @@ end.parse!
 
 Bakery::Log.level = Logger::DEBUG if(options[:verbose] == true)
 
-DOMAIN_NAME = "ksonsoftware.com"
 
-zones = JSON::parse(File.read( "conf/zones.json" ))
 
-CHEF_URL = "https://15.185.102.107/organizations/"
+## Load the zones 
+zones = JSON::parse(File.read( "%s/conf/zones.json" % FS_ROOT ))
 
-stacks = {}
-Dir.glob( "stacks/*.json" ).each do |f|
-  stacks[File.basename(f).gsub( /\.json/,'' )] = JSON::parse(File.read( f ))
-end
+## Load the stacks
+#stacks = {}
+#Dir.glob( "%s/stacks/*.json" % FS_ROOT ).each do |f|
+  #stacks[File.basename(f).gsub( /\.json/,'' )] = JSON::parse(File.read( f ))
+#end
 
-hpcloud = Bakery::HPCloud::Session.new()
+## Load the components
+#components = {}
+#Dir.glob( "%s/stacks/components/*.json" % FS_ROOT ).each do |f|
+  #components[File.basename(f).gsub( /\.json/,'' )] = JSON::parse(File.read( f ))
+#end
+#logstash = JSON::parse(File.open( "conf/logstash.json" ))
 
-logstash = JSON::parse(File.open( "conf/logstash.json" ))
+ADMIN_KEYS = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBiMMU5ptaEJLyoqowcACbcp8j0LXzNk/7pEtdZVqSFNH4LmkSe0qdeoe5vj4WDS0TgRA0e64H/HAEbTXJjk1212E6rZOd9ffeGBHiHUr+/aVc7x1clcv0bxQM+ox+eyrSMNC12En2zMQXrNP8iJAo7xvYf1AgzbH/YkjmOmHPslL/ILxBHTQ2KGKf9IMdqEh6nRCyrz81K2sTR+XFtZcIfT+C5VMUXJNhKdRhh1i+R+UQ1c9JEIwQTOcNF2Mdl1khpFGri3zIjvCFC+vDhUOe6a2VYWzO96N4U96EjKoJG4/NNHmIlSXlVhkvmzNiUu7mRG2zOnfPEOimD/k5YFFz krogebry@krogebry-workstation"
 
+#f = File.open( "%s/tmp/hosts" % FS_ROOT, "w" )
 zones.each do |zone_name,zone_cfg|
-  next if(zone_name != "prod0")
-  chef_zone_url = "%s/%s-%s" % [CHEF_URL, zone_name, DOMAIN_NAME.gsub( /\./, '-' )]
-  fs_client_key = "%s/.chef/keys/bakery-%s.%s.pem" % [ENV['HOME'], zone_name, DOMAIN_NAME]
-  chef_srv = Chef::REST.new( chef_zone_url, "bakery", fs_client_key )
-
-  zone_cfg["stacks"].each do |stack_name,stack_cfg|
-    Bakery::Log.debug( "Stack: %s" % stack_name )
-
-    merged = stacks[stack_name]
-    pp merged
-    merged["resources"].each do |name,cfg|
-      cfg.deep_merge!(Marshal.load(Marshal.dump(zone_cfg["defaults"])))
-    end
-    merged["zone"] = zone_cfg
-    merged["zone_name"] = zone_name
-    stack = Bakery::Stack.new( merged )
-    stack.check_cloud( chef_srv )
-
-    ## Deal with the inputs
-    #merged["inputs"].each do |input|
-      #logstash["resources"].each do |name,cfg|
-        #cfg.deep_merge!(Marshal.load(Marshal.dump(zone_cfg["defaults"])))
-      #end
-      #merged["zone"] = zone_cfg
-      #merged["zone_name"] = zone_name
-    #end
-  end
+  zone = Bakery::Zone.new( zone_name, zone_cfg )
+  zone.manage_cloud()
+  #f.puts(zone.servers.map{|srv| srv[".join( "\n" ))
 end
+#f.close
 

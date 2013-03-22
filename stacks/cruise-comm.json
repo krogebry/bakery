@@ -1,0 +1,15 @@
+{
+  "name": "cc",
+
+  "_inputs": [ "syslog", "authlog", "chef-log" ],
+
+  "resources": {
+    "slb": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[web_pie]" ]
+      }
+    }
+  }
+}

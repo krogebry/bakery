@@ -2,10 +2,10 @@
   "prod0": {
     "defaults": {
       "image_id": 80314,
-      "flavor_id": 102
+      "flavor_id": 100
     },
     "stacks": { 
-      "fat-chef": {
+      "cruise-comm": {
       }
     },
     "region_name": "az-1.region-a.geo-1"
@@ -14,10 +14,10 @@
   "prod1": {
     "defaults": {
       "image_id": 68157,
-      "flavor_id": 102
+      "flavor_id": 100
     },
     "stacks": {
-      "cruise_comm": {
+      "news-blur": {
       }
     },
     "region_name": "az-2.region-a.geo-1"
@@ -26,10 +26,18 @@
   "prod2": {
     "defaults": {
       "image_id": 49520,
-      "flavor_id": 102
+      "flavor_id": 104
     },
     "stacks": {
-      "fat_log": {
+      "fat-log": {
+        "resources": {
+          "es-master": {
+            "chef": {
+              "tags": [ "chef-log" ],
+              "run_list": [ "role[logstash_elasticsearch]" ]
+            }
+          }
+        }
       }
     },
     "region_name": "az-3.region-a.geo-1"

@@ -1,8 +1,9 @@
 {
   "name": "nb",
-  "inputs": [ "syslog", "authlog", "chef-log" ],
+  "_inputs": [ "sys-log", "auth-log", "chef-log" ],
 
-  "defaults": {
+  "components": {
+    "ops-auto": [ "zenoss", "logstash-combined" ]
   },
 
   "resources": {
@@ -44,16 +45,6 @@
       "chef": {
         "run_list": [ "role[news_blur_mongo_write_master]" ]
       }
-    },
-
-    "zenoss": {
-      "max": 1,
-      "min": 1,
-      "chef": {
-        "run_list": [ "role[zenoss_server]" ]
-      },
-      "flavor_id": 104
     }
-
   }
 }

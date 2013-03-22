@@ -8,4 +8,5 @@ end
 
 require "./lib/bakery/logging.rb"
 require "./lib/bakery/hpcloud.rb"
+require "./lib/bakery/zone.rb"
 require "./lib/bakery/stack.rb"

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ENV_NAME=$1
+
+for node_id in `hpcloud servers|grep ${ENV_NAME}.ksonsoftware.com|awk '{print $2}'`; do   hpcloud servers:remove $node_id; done 
+for node in `knife node list|grep "${ENV_NAME}"`; do   knife node delete $node -y ; knife client delete $node -y; done
+

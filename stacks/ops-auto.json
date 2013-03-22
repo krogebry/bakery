@@ -1,23 +1,23 @@
 {
-  "name": "cc",
+  "name": "oa",
 
   "inputs": [ "syslog", "authlog", "chef-log" ],
 
   "resources": {
-    "slb": {
+    "gates": {
       "max": 1,
       "min": 1,
       "chef": {
-        "run_list": [ "role[web_pie]" ]
+        "run_list": [ "role[opsauto-service]" ]
       }
     },
+
     "zenoss": {
       "max": 1,
       "min": 1,
       "chef": {
-        "run_list": [ "role[zenoss]" ]
-      },
-      "flavor_id": 104
+        "run_list": [ "role[zenoss_server]" ]
+      }
     }
   }
 }

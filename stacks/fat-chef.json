@@ -1,7 +1,19 @@
 {
   "name": "fc",
 
-  "inputs": [ "syslog", "authlog", "chef-log" ],
+  "_inputs": [ "syslog", "authlog", "chef-log" ],
+  "components": {
+    "ops-auto": {
+    },
+    "zenoss": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[zenoss_server]" ]
+      },
+      "flavor_id": 104
+    }
+  },
 
   "resources": {
     "fe": {
@@ -10,8 +22,7 @@
       "chef": {
         "tags": [ "fat-chef" ],
         "run_list": [ "role[fat-chef-fe]" ]
-      },
-      "flavor_id": 102
+      }
     },
 
     "be": {
@@ -22,15 +33,7 @@
         "run_list": [ "role[fat-chef-be]" ]
       },
       "flavor_id": 105
-    },
-
-    "zenoss": {
-      "max": 1,
-      "min": 1,
-      "chef": {
-        "run_list": [ "role[zenoss_server]" ]
-      },
-      "flavor_id": 104
     }
+
   }
 }

@@ -1,0 +1,14 @@
+{
+  "name": "zen",
+  "resources": {
+    "zenoss": {
+      "max": 1,
+      "min": 1,
+      "chef": {
+        "run_list": [ "role[zenoss_server]" ]
+      },
+      "flavor_id": 104
+    }
+  }
+}
+

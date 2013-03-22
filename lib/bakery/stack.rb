@@ -5,17 +5,19 @@ module Bakery
   class Stack
 
     @cfg
-    @hpcloud
-    @zone_cfg
-    @zone_name
-    attr_accessor :cfg
+    @name
+    #@hpcloud
+    #@zone_cfg
+    #@zone_name
+    attr_accessor :cfg, :name
 
-    def initialize( cfg )
+    def initialize( name, cfg )
       #Bakery::Log.debug( "Cfg: %s" % cfg );
       @cfg = cfg
-      @hpcloud = Bakery::HPCloud::Session.new()
-      @zone_cfg = cfg["zone"]
-      @zone_name = cfg["zone_name"]
+      @name = name
+      #@hpcloud = Bakery::HPCloud::Session.new()
+      #@zone_cfg = cfg["zone"]
+      #@zone_name = cfg["zone_name"]
       #Bakery::Log.debug( "Cfg: %s" % cfg )
     end
 
