@@ -1,0 +1,5 @@
+#!/bin/bash
+./bin/tune_env prod0 ; knife upload roles
+./bin/tune_env prod1 ; knife upload role
+./bin/tune_env prod2 ; knife upload role
+

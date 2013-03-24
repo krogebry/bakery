@@ -1,0 +1,33 @@
+{
+  "name": "logstash-auth-log-input",
+  "description": "Input handler for auth logging data.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+
+    "logstash": {                                                                                                                                                                   
+      "inputs": {
+        "auth-log": {
+          "port": 5611,
+          "query": {
+            "role": "logstash_elasticsearch_master",
+            "tags": "auth-log",
+            "chef_environment": "prod"
+          }
+        }
+      }
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[pan]",
+    "role[crust]",
+    "role[filling]",
+    "recipe[logstash::server]",
+    "recipe[log_pie::custom_input]",
+    "role[topping]"
+  ],
+  "env_run_lists": {
+  }
+}
