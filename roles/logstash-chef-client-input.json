@@ -3,10 +3,10 @@
   "description": "Input handler for chef-client logging data.",
   "json_class": "Chef::Role",
   "default_attributes": {
-    "logstash": {
+    "logstash": {                                                                                                                                                                   
       "inputs": {
         "chef-client": {
-          "port": 5670,
+          "port": 5671,
           "query": {
             "role": "logstash_elasticsearch_master",
             "tags": "chef-client",
@@ -14,21 +14,12 @@
           },
           "filters": {
             "grok": {
-              "type": "pchef_nginx",
-              "pattern": "%{IP:clientip} %{DATA:ident} %{DATA:remote_user} \\[%{HTTPDATE:timestamp}\\]  \\\"(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{DATA:httpversion})?|-)\\\" %{INT:status} \\\"%{DATA:request_time}\\\" %{INT:body_bytes_sent} \\\"%{DATA:referer}\\\" \\\"%{DATA:user_agent}\\\" \\\"%{IP:upstream_addr}:%{INT:upstream_port}\\\" \\\"%{INT:upstream_status}\\\" \\\"%{DATA:upstream_response_time}\\\" \\\"%{DATA:chef_version}\\\" \\\"%{DATA:http_x_ops_sign}\\\" \\\"%{DATA:http_x_ops_userid}\\\" \\\"%{TIMESTAMP_ISO8601:http_x_ops_timestamp}\\\" \\\"%{DATA:http_x_ops_content_hash}\\\" %{INT:request_length}"
-            },
-            "mutate": {
-              "type": "pchef_nginx",
-              "replace": [
-                "@timestamp",
-                "%{@fields.http_x_ops_timestamp}"
-              ]
+              "type": "chef-client",
+              "pattern": "%{HOSTNAME:chef_hostname}: \\[%{DATA:chef_time}\\] %{LOGLEVEL:chef_log_lvl}: %{GREEDYDATA:chef_msg}"
             },
             "grep": {
-              "type": "pchef_nginx",
-              "tags": [
-                "_grokparsefailure"
-              ],
+              "type": "chef-client",
+              "tags": [ "_grokparsefailure" ],
               "negate": true
             }
           }
